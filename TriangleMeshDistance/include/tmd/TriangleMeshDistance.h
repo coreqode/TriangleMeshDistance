@@ -309,7 +309,7 @@ inline tmd::Result tmd::TriangleMeshDistance::signed_distance(const std::array<d
 		result.barycentric[2]*this->vertices[triangle[2]]
 		);
 	const Vec3d u = p - nearest_point;
-  resutl.unsigned_distance = result.distance; 
+  result.unsigned_distance = result.distance; 
 	result.distance *= (u.dot(pseudonormal) >= 0.0) ? 1.0 : -1.0;
   result.pseudonormal = pseudonormal; 
 
