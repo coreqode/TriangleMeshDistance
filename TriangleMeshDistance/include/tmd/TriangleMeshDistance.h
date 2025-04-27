@@ -80,10 +80,12 @@ namespace tmd
 	struct Result
 	{
 		double distance = std::numeric_limits<double>::max();
+		double unsigned_distance = std::numeric_limits<double>::max();
 		Vec3d nearest_point;
 		tmd::NearestEntity nearest_entity;
 		int triangle_id = -1;
 		Vec3d barycentric;
+    Vec3d pseudonormal; 
 	};
 	// -----------------------------------
 
@@ -307,7 +309,9 @@ inline tmd::Result tmd::TriangleMeshDistance::signed_distance(const std::array<d
 		result.barycentric[2]*this->vertices[triangle[2]]
 		);
 	const Vec3d u = p - nearest_point;
+  resutl.unsigned_distance = result.distance; 
 	result.distance *= (u.dot(pseudonormal) >= 0.0) ? 1.0 : -1.0;
+  result.pseudonormal = pseudonormal; 
 
 	return result;
 }
